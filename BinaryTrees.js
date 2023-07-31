@@ -165,21 +165,38 @@ class BST {
         return "no ancestors found";
     }
     
-    createPreorderPrinter() {
+    preOrderTraversal(runner = this.root){
         let arr = []
-        preOrderTraversal(node) {
-          if (node !== null) {
-            arr.push(node.val)
-            preOrderTraversal(node.left);
-            preOrderTraversal(node.right);
-            return arr
-          }
+        if (runner !== null){
+            arr.push(runner.val)
+            arr.push(...this.preOrderTraversal(runner.left))
+
+            arr.push(...this.preOrderTraversal(runner.right))        
         }
-        return 
-      }
+        return arr
+        //example:
+        //const [1,2,3,4]
+        //   ^
+        //   |
+        //const [x,y, ...z]
+    }
+
+    postOrderTraversal(runner = this.root){
+        let arr = []
+        if (runner !== null){
+            
+            arr.push(...this.postOrderTraversal(runner.left))
+
+            arr.push(...this.postOrderTraversal(runner.right))   
+            arr.push(runner.val)     
+        }
+        return arr
+    }
+    inOrderTraversal(runner = this.root){
+        
+    }
     
 }
-
 
 let Tree = new BST()
 
@@ -194,11 +211,11 @@ Tree.add(5)
 Tree.add(15)
 
 //console.log(Tree)
-
+//console.log(Tree.root)
 let Tree2 = new BST()
 
-console.log(Tree.createPreorderPrinter())
+console.log(Tree.postOrderTraversal())
 
-array = [1,2,3,4,5]
+// array = [1,2,3,4,5]
 //Tree2.arrayToTree(Tree2, array)
 //console.log(Tree2)

@@ -195,7 +195,46 @@ class BST {
     inOrderTraversal(runner = this.root){
         
     }
-    
+    preOrderBSTtoLinkedList(root = this.root.val){
+        let prev = null
+        const traverse = node => {
+            if(node === null)   return
+            traverse(node.right)
+            traverse(node.left)
+            node.left = null
+            node.right = prev
+            prev = node
+        }
+        traverse(root)
+    }
+    postOrderBSTtoLinkedList(){
+
+    }
+    inOrderBSTtoLinkedList(){
+
+    }
+    minHeight(){
+        if (this.root === null) {
+            return 0;
+        }
+        function sizeHelp(runner) {
+            if (!runner) {
+                return 0;
+            }
+            if (sizeHelp(runner.left)< sizeHelp(runner.right)){
+                return sizeHelp(runner.left) + 1
+            }else{
+                return sizeHelp(runner.right) + 1
+            }
+        }
+        return sizeHelp(this.root);
+    }
+    preOrderTraversalnoRecurrsion(){
+
+    }
+    remove(){
+        
+    }
 }
 
 let Tree = new BST()
@@ -214,7 +253,7 @@ Tree.add(15)
 //console.log(Tree.root)
 let Tree2 = new BST()
 
-console.log(Tree.postOrderTraversal())
+console.log(Tree.preOrderBSTtoLinkedList())
 
 // array = [1,2,3,4,5]
 //Tree2.arrayToTree(Tree2, array)
